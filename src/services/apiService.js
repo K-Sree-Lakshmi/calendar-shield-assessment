@@ -6,7 +6,7 @@ const mockApiData = [
   {
     id: 1,
     name: "Alice Johnson",
-    date: "2024-07-10",
+    date: "2025-07-10",
     amount: 120.50,
     status: "Paid",
     timezone: "America/New_York"
@@ -14,7 +14,7 @@ const mockApiData = [
   {
     id: 2,
     name: "Michael Scott",
-    date: "2024-08-15",
+    date: "2025-08-25",
     amount: 250.00,
     status: "Pending",
     timezone: "America/New_York"
@@ -32,7 +32,7 @@ const mockApiData = [
   {
     id: 4,
     name: "Bob Smith",
-    date: "2024-09-12",
+    date: "2025-09-12",
     amount: 75.00,
     status: "Pending",
     timezone: "America/Los_Angeles"
@@ -40,7 +40,7 @@ const mockApiData = [
   {
     id: 5,
     name: "Dwight Schrute",
-    date: "2024-08-18",
+    date: "2025-08-18",
     amount: 180.00,
     status: "Paid",
     timezone: "America/Los_Angeles"
@@ -48,7 +48,7 @@ const mockApiData = [
   {
     id: 6,
     name: "Angela Martin",
-    date: "2024-10-01",
+    date: "2025-10-01",
     amount: 95.25,
     status: "Overdue",
     timezone: "America/Los_Angeles"
@@ -58,7 +58,7 @@ const mockApiData = [
   {
     id: 7,
     name: "Charlie Lee",
-    date: "2024-09-15",
+    date: "2025-09-15",
     amount: 200.00,
     status: "Overdue",
     timezone: "Europe/London"
@@ -66,7 +66,7 @@ const mockApiData = [
   {
     id: 8,
     name: "Oscar Martinez",
-    date: "2024-10-10",
+    date: "2025-10-10",
     amount: 150.00,
     status: "Paid",
     timezone: "Europe/London"
@@ -84,7 +84,7 @@ const mockApiData = [
   {
     id: 10,
     name: "Diana Prince",
-    date: "2024-08-18",
+    date: "2025-08-18",
     amount: 50.25,
     status: "Paid",
     timezone: "Europe/Berlin"
@@ -92,7 +92,7 @@ const mockApiData = [
   {
     id: 11,
     name: "Hans Müller",
-    date: "2024-09-25",
+    date: "2025-09-25",
     amount: 210.00,
     status: "Pending",
     timezone: "Europe/Berlin"
@@ -100,7 +100,7 @@ const mockApiData = [
   {
     id: 12,
     name: "Greta Schmidt",
-    date: "2024-10-05",
+    date: "2025-10-05",
     amount: 99.99,
     status: "Overdue",
     timezone: "Europe/Berlin"
@@ -118,7 +118,7 @@ const mockApiData = [
   {
     id: 14,
     name: "Ivan Petrov",
-    date: "2024-09-28",
+    date: "2025-09-28",
     amount: 220.00,
     status: "Paid",
     timezone: "Europe/Moscow"
@@ -144,7 +144,7 @@ const mockApiData = [
   {
     id: 17,
     name: "Fatima Al-Farsi",
-    date: "2024-09-22",
+    date: "2025-09-22",
     amount: 185.00,
     status: "Pending",
     timezone: "Asia/Dubai"
@@ -162,7 +162,7 @@ const mockApiData = [
   {
     id: 19,
     name: "George Wilson",
-    date: "2024-07-25",
+    date: "2025-07-25",
     amount: 89.99,
     status: "Overdue",
     timezone: "Asia/Kolkata"
@@ -170,7 +170,7 @@ const mockApiData = [
   {
     id: 20,
     name: "Priya Sharma",
-    date: "2024-08-30",
+    date: "2025-08-30",
     amount: 120.00,
     status: "Paid",
     timezone: "Asia/Kolkata"
@@ -196,7 +196,7 @@ const mockApiData = [
   {
     id: 23,
     name: "Li Wei",
-    date: "2024-08-18",
+    date: "2025-08-18",
     amount: 175.00,
     status: "Paid",
     timezone: "Asia/Shanghai"
@@ -214,7 +214,7 @@ const mockApiData = [
   {
     id: 25,
     name: "Ethan Hunt",
-    date: "2024-07-20",
+    date: "2025-07-20",
     amount: 300.00,
     status: "Pending",
     timezone: "Asia/Tokyo"
@@ -222,7 +222,7 @@ const mockApiData = [
   {
     id: 26,
     name: "Sakura Tanaka",
-    date: "2024-08-28",
+    date: "2025-08-28",
     amount: 110.00,
     status: "Paid",
     timezone: "Asia/Tokyo"
@@ -240,7 +240,7 @@ const mockApiData = [
   {
     id: 28,
     name: "Fiona Green",
-    date: "2024-07-22",
+    date: "2025-07-22",
     amount: 150.75,
     status: "Paid",
     timezone: "Australia/Sydney"
@@ -248,7 +248,7 @@ const mockApiData = [
   {
     id: 29,
     name: "Jack Wilson",
-    date: "2024-08-15",
+    date: "2025-08-15",
     amount: 180.00,
     status: "Pending",
     timezone: "Australia/Sydney"
@@ -256,7 +256,7 @@ const mockApiData = [
   {
     id: 30,
     name: "Emily Brown",
-    date: "2024-09-10",
+    date: "2025-09-10",
     amount: 99.99,
     status: "Overdue",
     timezone: "Australia/Sydney"
@@ -302,13 +302,17 @@ export const fetchDataByDateRange = async (startDate, endDate, timezone) => {
 
     console.log('API Payload:', apiPayload);
 
-    // Filter mock data based on date range
+    // Filter mock data based on date range AND timezone
     const startDateObj = new Date(startDate);
     const endDateObj = new Date(endDate);
+
     
     const filteredData = mockApiData.filter(item => {
       const itemDate = new Date(item.date);
-      return itemDate >= startDateObj && itemDate <= endDateObj;
+      const dateInRange = itemDate >= startDateObj && itemDate <= endDateObj;
+      const timezoneMatch = item.timezone === timezone;
+      // Only return items that match both date range AND timezone
+      return dateInRange && timezoneMatch;
     });
 
     // Simulate API response
@@ -342,4 +346,4 @@ export const fetchDataByDateRange = async (startDate, endDate, timezone) => {
 // Get all available data (for testing purposes)
 export const getAllMockData = () => {
   return mockApiData;
-}; 
+};

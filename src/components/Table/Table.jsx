@@ -10,7 +10,7 @@ const Table = () => {
   const [sortConfig, setSortConfig] = useState({key:null,type:null, direction:null});
   const [filteredData, setFilteredData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
-  const columns = [{name:"Name", key:"name", type:"string"}, {name:"Date", key:"date", type:"date"}, {name:"Amount", key:"amount", type:"float"}, {name:"Status", key:"status", type:"string"}];
+  const columns = [{name:"Name", key:"name", type:"string"}, {name:"Date", key:"date", type:"date"}, {name:"TimeZone", key:"timezone", type:"string"}, {name:"Amount", key:"amount", type:"float"}, {name:"Status", key:"status", type:"string"}];
   
   // Store original data when tableData changes
   useEffect(() => {
@@ -45,7 +45,7 @@ const Table = () => {
         // Check if the date matches the search term (case-insensitive)
         const dateMatch = !searchTerms.date || 
           row.date.toLowerCase().includes(searchTerms.date);
-        
+
         // Check if the amount matches the search term (as a substring)
         const amountMatch = !searchTerms.amount || 
           row.amount.toString().includes(searchTerms.amount);
@@ -84,7 +84,6 @@ const Table = () => {
   }
 
   const callSearch = (e, key) => {
-    console.log(e,"e")
     setSearchTerm(prev=>({...prev, [key]:e.target.value}))
   }
 
@@ -137,12 +136,13 @@ const Table = () => {
                     <div className="table-header-container">
                       <div className="table-header-item">
                         <span>{item.name}</span>
-                        <input id={item.key} type="search" placeholder="Search" value={searchTerm[item.key]} onChange={e=>callSearch(e, item.key)} />
+                        {item.key === "timezone" ? null : <input id={item.key} type="search" placeholder="Search" value={searchTerm[item.key]} onChange={e=>callSearch(e, item.key)} />}
                       </div>
-                      <div className="table-header-item sort-icon">
+                      {item.key === "timezone" ? null : <div className="table-header-item sort-icon">
                         <FaSortUp onClick={()=>handleSort(item.key, item.type, "asc")} disabled={originalData.length === 0} />
                         <FaSortDown onClick={()=>handleSort(item.key, item.type, "desc")} disabled={originalData.length === 0}/>
                       </div>
+                      }
                     </div>
                   </th>
                 )
@@ -155,6 +155,7 @@ const Table = () => {
                 <tr key={row.id}>
                   <td>{row.name}</td>
                   <td>{row.date}</td>
+                  <td>{row.timezone}</td>
                   <td>${row.amount.toFixed(2)}</td>
                   <td>
                     <span className={`status-badge ${row.status.toLowerCase()}`}>
@@ -165,7 +166,7 @@ const Table = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="4" className="no-data">
+                <td colSpan="5" className="no-data">
                   {originalData.length > 0 ? "No matching results found" : "Please select a date range and click Apply to load data"}
                 </td>
               </tr>

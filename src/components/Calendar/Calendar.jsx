@@ -40,7 +40,7 @@ const Calendar = () => {
       ]);
     const [selectedTimeZone, setSelectedTimeZone] = useState('');
     const [formattedDateRange, setFormattedDateRange] = useState('');
-    const [maxDays, setMaxDays] = useState();
+    const [maxDays, setMaxDays] = useState('');
 
     // Use data context
     const { 
@@ -237,7 +237,7 @@ const Calendar = () => {
           >
             {loading ? 'Fetching Data...' : 'Apply'}
           </button>
-          <button className="secondary-button margin-left-1rem" onClick={resetAll}>Reset</button>
+          <button className="secondary-button margin-left-1rem" onClick={()=>resetAll()}>Reset</button>
       </div>
       <div className="formatted-date-container container-box">
       <span>Formatted Date :  </span>
