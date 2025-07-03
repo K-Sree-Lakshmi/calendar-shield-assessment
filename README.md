@@ -40,3 +40,9 @@ Customizable Design: Enjoy a clean and intuitive table design with custom stylin
 ### Data Handling
 Dynamic Data Fetching: Data is fetched from a dummy API based on your selected date range and timezone, ensuring relevant results.
 
+### Screen Snapshots - 
+<img width="1728" alt="image" src="https://github.com/user-attachments/assets/9f0b9f3e-6b3c-4536-85b7-8fd5896b532c" />
+<img width="1728" alt="image" src="https://github.com/user-attachments/assets/738f5db5-d383-4eb0-8a75-a17e98940eb1" />
+
+
+
