@@ -26,7 +26,6 @@
 }
 
 table {
-    border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
     width: 100%;
@@ -151,6 +150,23 @@ tbody tr:hover {
 .table-title{
     margin-bottom: 2rem;
     text-align: left;
+}
+
+td:focus{
+    border: 1px solid #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+td.copied{
+    background-color: #bcd3e5;
+    border-color: #007bff;
+    transition: background-color 0.3s ease;
+}
+
+/* Clickable cell styles */
+td[title="Click to copy"] {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 

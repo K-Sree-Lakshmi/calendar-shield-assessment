@@ -87,6 +87,32 @@ const Table = () => {
     setSearchTerm(prev=>({...prev, [key]:e.target.value}))
   }
 
+  // Handle cell copy functionality
+  const handleCellCopy = async (cellValue, cellElement) => {
+    try {
+      // Copy to clipboard
+      await navigator.clipboard.writeText(cellValue);
+      
+      // Add visual feedback immediately
+      cellElement.classList.add('copied');
+      
+      // Remove the class after a short delay to show feedback
+      setTimeout(() => {
+        cellElement.classList.remove('copied');
+      }, 500);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
+
+  // Handle keyboard copy events
+  const handleKeyDown = (e, value) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+      e.preventDefault();
+      handleCellCopy(value, e.target);
+    }
+  };
+
   useEffect(()=>{
     if(!isEmpty(sortConfig)){
         const {key, type, direction} = sortConfig;
@@ -153,11 +179,40 @@ const Table = () => {
             {filteredData.length > 0 ? (
               filteredData.map(row => (
                 <tr key={row.id}>
-                  <td>{row.name}</td>
-                  <td>{row.date}</td>
-                  <td>{row.timezone}</td>
-                  <td>${row.amount.toFixed(2)}</td>
-                  <td>
+                  <td 
+                    tabIndex="0" 
+                    onKeyDown={(e) => handleKeyDown(e, row.name)}
+                    title="Click to copy"
+                  >
+                    {row.name}
+                  </td>
+                  <td 
+                    tabIndex="0" 
+                    onKeyDown={(e) => handleKeyDown(e, row.date)}
+                    title="Click to copy"
+                  >
+                    {row.date}
+                  </td>
+                  <td 
+                    tabIndex="0" 
+                    onKeyDown={(e) => handleKeyDown(e, row.timezone)}
+                    title="Click to copy"
+                    style={{cursor: 'pointer'}}
+                  >
+                    {row.timezone}
+                  </td>
+                  <td 
+                    tabIndex="0" 
+                    onKeyDown={(e) => handleKeyDown(e, row.amount.toFixed(2))}
+                    title="Click to copy"
+                  >
+                    ${row.amount.toFixed(2)}
+                  </td>
+                  <td 
+                    tabIndex="0" 
+                    onKeyDown={(e) => handleKeyDown(e, row.status)}
+                    title="Click to copy"
+                  >
                     <span className={`status-badge ${row.status.toLowerCase()}`}>
                       {row.status}
                     </span>
