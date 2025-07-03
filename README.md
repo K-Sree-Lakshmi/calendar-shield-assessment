@@ -37,6 +37,6 @@ Column-Specific Search: Efficiently search and filter data within specific table
 
 Customizable Design: Enjoy a clean and intuitive table design with custom styling, sorting icons, cell focus and highlight on copying a cell.
 
-###Data Handling
+### Data Handling
 Dynamic Data Fetching: Data is fetched from a dummy API based on your selected date range and timezone, ensuring relevant results.
 
