@@ -14,10 +14,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint warnings in the console.
 
-###Features
+### Features
 This project provides a robust data display and manipulation interface with the following key functionalities:
 
-###Date and Time Selection
+### Date and Time Selection
 Flexible Date Range: Easily select a date range with a default of 7 days from today's date.
 
 Date Restrictions: Prevent selection of dates older than 90 days as a start date.
@@ -28,7 +28,7 @@ Global Timezone Support: View and adjust dates and times across 10 different tim
 
 Date Specific Messaging: Hover over certain dates to see predefined messages. Some dates are highlighted and disabled based on a legend. Added this sample message for 4 months.
 
-###Data Table
+### Data Table
 Comprehensive Data View: Displays data in a table with essential columns like Name, Date, Amount, and Status.
 
 Interactive Sorting: Sort table data in ascending or descending order by various columns.
