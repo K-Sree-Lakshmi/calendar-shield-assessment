@@ -12,59 +12,31 @@ Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
-You may also see any lint errors in the console.
+You may also see any lint warnings in the console.
 
-### `npm test`
+Features
+This project provides a robust data display and manipulation interface with the following key functionalities:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Date and Time Selection
+Flexible Date Range: Easily select a date range with a default of 7 days from today's date.
 
-### `npm run build`
+Date Restrictions: Prevent selection of dates older than 90 days as a start date.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Maximum Duration: Limit date range selections to a maximum of N number days, with an alert if exceeded. Min day - 1, Max days - 365.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Global Timezone Support: View and adjust dates and times across 10 different timezones, ensuring accurate data representation worldwide.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Date Specific Messaging: Hover over certain dates to see predefined messages. Some dates are highlighted and disabled based on a legend. Added this sample message for 4 months.
 
-### `npm run eject`
+Data Table
+Comprehensive Data View: Displays data in a table with essential columns like Name, Date, Amount, and Status.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Interactive Sorting: Sort table data in ascending or descending order by various columns.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Column-Specific Search: Efficiently search and filter data within specific table columns.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Customizable Design: Enjoy a clean and intuitive table design with custom styling, sorting icons, cell focus and highlight on copying a cell.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Data Handling
+Dynamic Data Fetching: Data is fetched from a dummy API based on your selected date range and timezone, ensuring relevant results.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
