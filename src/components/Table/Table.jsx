@@ -4,13 +4,59 @@ import "./Table.css";
 import { FaSortUp, FaSortDown } from "react-icons/fa";
 import { isEmpty } from "lodash";
 
+export const tableColumns = [
+  {
+    name: "Name",
+    key: "name",
+    type: "string",
+    renderCell: row => row.name,
+    getCopyValue: row => row.name,
+    searchable: true
+  },
+  {
+    name: "Date",
+    key: "date",
+    type: "date",
+    renderCell: row => row.date,
+    getCopyValue: row => row.date,
+    searchable: true
+  },
+  {
+    name: "TimeZone",
+    key: "timezone",
+    type: "string",
+    renderCell: row => row.timezone,
+    getCopyValue: row => row.timezone,
+    searchable: false
+  },
+  {
+    name: "Amount",
+    key: "amount",
+    type: "float",
+    renderCell: row => `$${row.amount.toFixed(2)}`,
+    getCopyValue: row => row.amount.toFixed(2),
+    searchable: true
+  },
+  {
+    name: "Status",
+    key: "status",
+    type: "string",
+    renderCell: row => (
+      <span className={`status-badge ${row.status.toLowerCase()}`}>
+        {row.status}
+      </span>
+    ),
+    getCopyValue: row => row.status,
+    searchable: true
+  }
+];
+
 const Table = () => {
   const { tableData, loading, error } = useData();
   const [searchTerm, setSearchTerm] = useState({name:"", date:"", amount:"", status:""});
   const [sortConfig, setSortConfig] = useState({key:null,type:null, direction:null});
   const [filteredData, setFilteredData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
-  const columns = [{name:"Name", key:"name", type:"string"}, {name:"Date", key:"date", type:"date"}, {name:"TimeZone", key:"timezone", type:"string"}, {name:"Amount", key:"amount", type:"float"}, {name:"Status", key:"status", type:"string"}];
   
   // Store original data when tableData changes
   useEffect(() => {
@@ -114,7 +160,7 @@ const Table = () => {
   };
 
   useEffect(()=>{
-    if(!isEmpty(sortConfig)){
+    if(sortConfig.key && sortConfig.direction){
         const {key, type, direction} = sortConfig;
         let sortedData = [...filteredData].sort((a,b)=>{
           if(type === "string"){
@@ -126,6 +172,7 @@ const Table = () => {
           else if(type === "float"){
             return direction === "asc" ? a[key] - b[key] : b[key] - a[key];
           }
+          return 0;
         });
         setFilteredData(sortedData);
     }
@@ -156,15 +203,15 @@ const Table = () => {
         <table className="table">
           <thead>
             <tr>
-              {columns.map(item=>{
+              {tableColumns.map(item=>{
                 return(
                   <th key={item.key}>
                     <div className="table-header-container">
                       <div className="table-header-item">
                         <span>{item.name}</span>
-                        {item.key === "timezone" ? null : <input id={item.key} type="search" placeholder="Search" value={searchTerm[item.key]} onChange={e=>callSearch(e, item.key)} />}
+                        {!item.searchable ? null : <input id={item.key} type="search" placeholder="Search" value={searchTerm[item.key]} onChange={e=>callSearch(e, item.key)} />}
                       </div>
-                      {item.key === "timezone" ? null : <div className="table-header-item sort-icon">
+                      {!item.searchable ? null : <div className="table-header-item sort-icon">
                         <FaSortUp onClick={()=>handleSort(item.key, item.type, "asc")} disabled={originalData.length === 0} />
                         <FaSortDown onClick={()=>handleSort(item.key, item.type, "desc")} disabled={originalData.length === 0}/>
                       </div>
@@ -179,44 +226,16 @@ const Table = () => {
             {filteredData.length > 0 ? (
               filteredData.map(row => (
                 <tr key={row.id}>
-                  <td 
-                    tabIndex="0" 
-                    onKeyDown={(e) => handleKeyDown(e, row.name)}
-                    title="Click to copy"
-                  >
-                    {row.name}
-                  </td>
-                  <td 
-                    tabIndex="0" 
-                    onKeyDown={(e) => handleKeyDown(e, row.date)}
-                    title="Click to copy"
-                  >
-                    {row.date}
-                  </td>
-                  <td 
-                    tabIndex="0" 
-                    onKeyDown={(e) => handleKeyDown(e, row.timezone)}
-                    title="Click to copy"
-                    style={{cursor: 'pointer'}}
-                  >
-                    {row.timezone}
-                  </td>
-                  <td 
-                    tabIndex="0" 
-                    onKeyDown={(e) => handleKeyDown(e, row.amount.toFixed(2))}
-                    title="Click to copy"
-                  >
-                    ${row.amount.toFixed(2)}
-                  </td>
-                  <td 
-                    tabIndex="0" 
-                    onKeyDown={(e) => handleKeyDown(e, row.status)}
-                    title="Click to copy"
-                  >
-                    <span className={`status-badge ${row.status.toLowerCase()}`}>
-                      {row.status}
-                    </span>
-                  </td>
+                  {tableColumns.map(column => (
+                    <td
+                      key={column.key}
+                      tabIndex="0"
+                      onKeyDown={(e) => handleKeyDown(e, column.getCopyValue(row))}
+                      title="Click to copy"
+                    >
+                      {column.renderCell(row)}
+                    </td>
+                  ))}
                 </tr>
               ))
             ) : (
