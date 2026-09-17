@@ -21,13 +21,13 @@ const timeZones = [
 
 // Predefined messages and status for specific dates
 const dateMessages = {
-  '2025-08-01': { message: 'State Holiday', disabled: true, type: 'holiday' },
-  '2025-08-15': { message: 'Independence Day', disabled: true, type: 'holiday' },
-  '2025-09-10': { message: 'Quarterly Team Meeting', disabled: false, type: 'meeting' },
-  '2025-09-15': { message: 'System Maintenance Window', disabled: true, type: 'maintenance' },
-  '2025-07-20': { message: 'Project Alpha Deadline', disabled: false, type: 'deadline' },
-  '2025-10-25': { message: 'Company Picnic', disabled: false, type: 'event' },
-  '2025-07-31': { message: 'Monthly Review Meeting', disabled: false, type: 'meeting' },
+  '2026-09-21': { message: 'State Holiday', disabled: true, type: 'holiday' },
+  '2026-10-02': { message: 'Independence Day', disabled: true, type: 'holiday' },
+  '2026-10-14': { message: 'Quarterly Team Meeting', disabled: false, type: 'meeting' },
+  '2026-10-28': { message: 'System Maintenance Window', disabled: true, type: 'maintenance' },
+  '2026-11-06': { message: 'Project Alpha Deadline', disabled: false, type: 'deadline' },
+  '2026-11-20': { message: 'Company Picnic', disabled: false, type: 'event' },
+  '2026-12-04': { message: 'Monthly Review Meeting', disabled: false, type: 'meeting' },
 };
 
 const Calendar = () => {
