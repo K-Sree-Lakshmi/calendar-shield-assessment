@@ -10,7 +10,7 @@ const Table = () => {
   const [sortConfig, setSortConfig] = useState({key:null,type:null, direction:null});
   const [filteredData, setFilteredData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
-  const columns = [{name:"Name", key:"name", type:"string"}, {name:"Date", key:"date", type:"date"}, {name:"TimeZone", key:"timezone", type:"string"}, {name:"Amount", key:"amount", type:"float"}, {name:"Status", key:"status", type:"string"}];
+  const columns = [{name:"Name", key:"name", type:"string"}, {name:"Date", key:"date", type:"date"}, {name:"TimeZone", key:"timezone", type:"string"}, {name:"Status", key:"status", type:"string"}, {name:"Amount", key:"amount", type:"float"}];
   
   // Store original data when tableData changes
   useEffect(() => {
