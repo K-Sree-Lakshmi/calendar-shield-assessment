@@ -20,22 +20,28 @@
 
 .table-container {
     max-height: 300px;
+    overflow-x: auto;
     overflow-y: auto;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
 }
 
-table {
+.table {
     border-spacing: 0;
     table-layout: fixed;
+    min-width: 680px;
     width: 100%;
   }
   
-td, th {
+.table td,
+.table th {
     border: 1px solid #ddd;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
     padding: 8px;
     text-align: left;
     vertical-align: top;
+    word-break: break-word;
   }
 
 /* Consolidated table header styles */
@@ -93,6 +99,9 @@ thead th {
 
 /* Status Badge Styles */
 .status-badge {
+    display: inline-block;
+    max-width: 100%;
+    overflow-wrap: normal;
     padding: 0.25rem 0.5rem;
     border-radius: 12px;
     font-size: 0.75rem;
@@ -124,7 +133,9 @@ thead th {
     text-align: center;
     font-style: italic;
     color: var(--muted-text);
+    overflow-wrap: normal;
     padding: 2rem !important;
+    word-break: normal;
 }
 
 /* Table Row Hover Effect */
@@ -136,14 +147,25 @@ tbody tr:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 0.5rem;
+    min-width: 0;
 }
 
 .table-header-item{
     display: flex;
     flex-direction: column;
+    min-width: 0;
+}
+
+.table-header-item input {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
 }
 
 .sort-icon{
+    flex: 0 0 auto;
     cursor: pointer;
 }
 
@@ -168,5 +190,3 @@ td[title="Click to copy"] {
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
-
-
