@@ -61,14 +61,17 @@
 .calendar.container-box {
     margin-bottom: var(--spacing-md);
     position: relative;
-    overflow: hidden;
-    z-index: 1;
+    overflow: visible;
 }
 
-.calendar-container .rdrDays {
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
+.calendar-container,
+.calendar-container .rdrDateRangePickerWrapper,
+.calendar-container .rdrDateRangeWrapper,
+.calendar-container .rdrCalendarWrapper,
+.calendar-container .rdrMonth,
+.calendar-container .rdrDays,
+.calendar-container .rdrDay {
+    overflow: visible;
 }
 
 .time-zone-label{
@@ -186,6 +189,11 @@
     cursor: pointer;
 }
 
+.custom-day:hover,
+.custom-day:focus {
+    z-index: calc(var(--z-index-tooltip) + 1);
+}
+
 .custom-day.disabled {
     cursor: not-allowed;
     opacity: var(--opacity-disabled);
@@ -278,7 +286,7 @@
         flex-direction: column;
         align-items: stretch;
         justify-content: flex-start;
-        overflow: hidden;
+        overflow: visible;
     }
 
     .custom-day[data-tooltip]:hover::after,
@@ -289,9 +297,9 @@
     .rdrDay:focus-within .custom-day[data-tooltip]::after,
     .rdrDay:hover .custom-day[data-tooltip]::before,
     .rdrDay:focus-within .custom-day[data-tooltip]::before {
-        left: 0;
-        transform: none;
-        bottom: calc(100% - 28px);
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 100%;
     }
 
     .calendar-container,
