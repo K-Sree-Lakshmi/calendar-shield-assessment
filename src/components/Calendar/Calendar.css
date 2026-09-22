@@ -60,6 +60,15 @@
 
 .calendar.container-box {
     margin-bottom: var(--spacing-md);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.calendar-container .rdrDays {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .time-zone-label{
@@ -216,8 +225,11 @@
 }
 
 /* Tooltip styles */
-.custom-day[title]:hover::after {
-    content: attr(title);
+.custom-day[data-tooltip]:hover::after,
+.custom-day[data-tooltip]:focus::after,
+.rdrDay:hover .custom-day[data-tooltip]::after,
+.rdrDay:focus-within .custom-day[data-tooltip]::after {
+    content: attr(data-tooltip);
     position: absolute;
     bottom: 100%;
     left: 50%;
@@ -232,7 +244,10 @@
     margin-bottom: 5px;
 }
 
-.custom-day[title]:hover::before {
+.custom-day[data-tooltip]:hover::before,
+.custom-day[data-tooltip]:focus::before,
+.rdrDay:hover .custom-day[data-tooltip]::before,
+.rdrDay:focus-within .custom-day[data-tooltip]::before {
     content: '';
     position: absolute;
     bottom: 100%;
@@ -241,6 +256,11 @@
     border: 5px solid transparent;
     border-top-color: var(--color-dark);
     z-index: var(--z-index-tooltip);
+}
+
+.custom-day:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }
 
 /* Hover effects */
@@ -259,6 +279,19 @@
         align-items: stretch;
         justify-content: flex-start;
         overflow: hidden;
+    }
+
+    .custom-day[data-tooltip]:hover::after,
+    .custom-day[data-tooltip]:focus::after,
+    .custom-day[data-tooltip]:hover::before,
+    .custom-day[data-tooltip]:focus::before,
+    .rdrDay:hover .custom-day[data-tooltip]::after,
+    .rdrDay:focus-within .custom-day[data-tooltip]::after,
+    .rdrDay:hover .custom-day[data-tooltip]::before,
+    .rdrDay:focus-within .custom-day[data-tooltip]::before {
+        left: 0;
+        transform: none;
+        bottom: calc(100% - 28px);
     }
 
     .calendar-container,

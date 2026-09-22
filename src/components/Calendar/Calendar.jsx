@@ -21,6 +21,7 @@ const timeZones = [
 
 // Predefined messages and status for specific dates
 const dateMessages = {
+  '2026-09-02': { message: 'Executive blackout window - approvals unavailable', disabled: false, type: 'event' },
   '2026-09-21': { message: 'State Holiday', disabled: true, type: 'holiday' },
   '2026-10-02': { message: 'Independence Day', disabled: true, type: 'holiday' },
   '2026-10-14': { message: 'Quarterly Team Meeting', disabled: false, type: 'meeting' },
@@ -80,8 +81,9 @@ const Calendar = () => {
       return (
         <div 
           className={`custom-day ${dateInfo.type} ${dateInfo.disabled ? 'disabled' : ''}`}
-          title={dateInfo.message}
           data-tooltip={dateInfo.message}
+          tabIndex={0}
+          aria-label={`${format(day, 'd')}: ${dateInfo.message}`}
         >
           <span className="day-number">{format(day, 'd')}</span>
           <span className="day-indicator">●</span>
