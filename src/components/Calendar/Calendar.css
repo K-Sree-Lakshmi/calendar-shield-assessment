@@ -60,6 +60,18 @@
 
 .calendar.container-box {
     margin-bottom: var(--spacing-md);
+    position: relative;
+    overflow: visible;
+}
+
+.calendar-container,
+.calendar-container .rdrDateRangePickerWrapper,
+.calendar-container .rdrDateRangeWrapper,
+.calendar-container .rdrCalendarWrapper,
+.calendar-container .rdrMonth,
+.calendar-container .rdrDays,
+.calendar-container .rdrDay {
+    overflow: visible;
 }
 
 .time-zone-label{
@@ -177,6 +189,11 @@
     cursor: pointer;
 }
 
+.custom-day:hover,
+.custom-day:focus {
+    z-index: calc(var(--z-index-tooltip) + 1);
+}
+
 .custom-day.disabled {
     cursor: not-allowed;
     opacity: var(--opacity-disabled);
@@ -216,8 +233,11 @@
 }
 
 /* Tooltip styles */
-.custom-day[title]:hover::after {
-    content: attr(title);
+.custom-day[data-tooltip]:hover::after,
+.custom-day[data-tooltip]:focus::after,
+.rdrDay:hover .custom-day[data-tooltip]::after,
+.rdrDay:focus-within .custom-day[data-tooltip]::after {
+    content: attr(data-tooltip);
     position: absolute;
     bottom: 100%;
     left: 50%;
@@ -232,7 +252,10 @@
     margin-bottom: 5px;
 }
 
-.custom-day[title]:hover::before {
+.custom-day[data-tooltip]:hover::before,
+.custom-day[data-tooltip]:focus::before,
+.rdrDay:hover .custom-day[data-tooltip]::before,
+.rdrDay:focus-within .custom-day[data-tooltip]::before {
     content: '';
     position: absolute;
     bottom: 100%;
@@ -241,6 +264,11 @@
     border: 5px solid transparent;
     border-top-color: var(--color-dark);
     z-index: var(--z-index-tooltip);
+}
+
+.custom-day:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }
 
 /* Hover effects */
@@ -258,7 +286,20 @@
         flex-direction: column;
         align-items: stretch;
         justify-content: flex-start;
-        overflow: hidden;
+        overflow: visible;
+    }
+
+    .custom-day[data-tooltip]:hover::after,
+    .custom-day[data-tooltip]:focus::after,
+    .custom-day[data-tooltip]:hover::before,
+    .custom-day[data-tooltip]:focus::before,
+    .rdrDay:hover .custom-day[data-tooltip]::after,
+    .rdrDay:focus-within .custom-day[data-tooltip]::after,
+    .rdrDay:hover .custom-day[data-tooltip]::before,
+    .rdrDay:focus-within .custom-day[data-tooltip]::before {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 100%;
     }
 
     .calendar-container,
